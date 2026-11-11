@@ -1,6 +1,6 @@
-# Glosarium JavaScript Beginner
+# Glosarium JavaScript — Beginner sampai Expert
 
-Istilah-istilah yang muncul dalam 30 task, diurutkan alfabetis. Gunakan sebagai rujukan cepat saat membaca materi atau bertanya di kelas.
+Istilah-istilah yang muncul dalam 60 task, diurutkan alfabetis. Bagian pertama untuk fondasi; bagian kedua untuk level intermediate dan expert.
 
 | Istilah | Arti | Contoh |
 | --- | --- | --- |
@@ -68,3 +68,62 @@ Istilah-istilah yang muncul dalam 30 task, diurutkan alfabetis. Gunakan sebagai 
 | `localStorage` vs variabel | `localStorage` bertahan setelah refresh; variabel hilang saat halaman dimuat ulang. |
 | Callback vs Promise | Callback adalah fungsi yang dipanggil; Promise adalah objek yang mewakili hasil nanti. |
 | `async` vs `await` | `async` menandai fungsi; `await` menunggu Promise di dalam fungsi async. |
+
+---
+
+## Istilah Intermediate & Expert
+
+| Istilah | Arti | Contoh |
+| --- | --- | --- |
+| **AbortSignal** | Sinyal untuk membatalkan operasi async seperti `fetch`. | `fetch(url, { signal: AbortSignal.timeout(2000) })` |
+| **Adapter** | Implementasi konkret dari sebuah port/interface. | `InMemoryMenuRepository` |
+| **Artifact** | Hasil build yang disimpan/diunggah CI. | `app-dist.zip` |
+| **Backoff** | Jeda yang bertambah antar percobaan retry. | `delay * 2 ** attempt` |
+| **Backpressure** | Kendali agar produsen tidak membanjiri konsumen. | Antrean worker maksimal 4 chunk |
+| **Bundling** | Menggabungkan modul menjadi file produksi. | `vite build` |
+| **Cardinality** | Jumlah kombinasi unik label metrik. | ID user sebagai label = cardinality tinggi |
+| **CI/CD** | Otomatisasi integrasi dan pengiriman kode. | GitHub Actions |
+| **Closure** | Fungsi yang mengingat variabel dari scope pembuatnya. | `buatPenghitung()` |
+| **Code splitting** | Memecah bundle agar dimuat sesuai kebutuhan. | `import("./laporan.js")` |
+| **Composition root** | Tempat merangkai semua dependency aplikasi. | `composition.js` |
+| **Coverage** | Persentase kode yang dijalankan test. | `coverage line 87%` |
+| **Curry** | Mengubah fungsi multi-argument menjadi rantai fungsi. | `fn(1)(2)(3)` |
+| **Dependency injection** | Memberikan dependency dari luar, bukan membuat di dalam. | `createService({ repo })` |
+| **Docker** | Paket aplikasi beserta environment-nya. | `docker build -t kopi .` |
+| **ES Module** | Sistem modul bawaan JavaScript. | `import { menu } from "./menu.js"` |
+| **Event loop** | Mekanisme Node/browser menjalankan tugas async. | Heartbeat tetap jalan saat worker aktif |
+| **Graceful shutdown** | Menutup aplikasi tanpa memutus request aktif. | Tangani `SIGTERM` |
+| **Health check** | Endpoint status hidup/siap melayani. | `/health/ready` |
+| **Higher-order function** | Fungsi yang menerima/mengembalikan fungsi. | `map(fn)`, `buatAturanDiskon()` |
+| **Histogram** | Metrik distribusi nilai (misalnya durasi). | `request_duration_ms_bucket` |
+| **HMAC** | Tanda tangan pesan dengan secret bersama. | Token auth HS256 |
+| **Immutability** | Tidak mengubah data asli; membuat salinan baru. | `{ ...order, status: "baru" }` |
+| **Integration test** | Test beberapa komponen bersama, misalnya HTTP + DB. | Test endpoint dengan server nyata |
+| **LRU** | Least Recently Used; evict item paling lama diakses. | Cache maksimal 100 item |
+| **Memoization** | Menyimpan hasil fungsi berdasarkan argument. | `memoize(fib)` |
+| **Metrics** | Angka terukur tentang perilaku sistem. | `http_requests_total` |
+| **Migration** | Perubahan skema database yang terurut. | `001_init.sql` |
+| **Mock** | Pengganti dependency untuk test. | Repo palsu yang melempar error |
+| **Named capture group** | Grup regex dengan nama. | `(?<nama>.+?)` |
+| **node:sqlite** | Modul SQLite bawaan Node.js 22+. | `new DatabaseSync("toko.db")` |
+| **OpenAPI** | Spesifikasi kontrak REST API. | `openapi.yaml` |
+| **p95** | Nilai yang 95% request berada di bawahnya. | p95 latency 80 ms |
+| **Pipe** | Komposisi fungsi kiri ke kanan. | `pipe(f, g)(x)` |
+| **Port** | Kontrak/interface yang dipakai service. | `MenuRepository` |
+| **Prepared statement** | Query berparameter yang aman dari SQL injection. | `db.prepare("... WHERE id = ?")` |
+| **Prototype pollution** | Serangan lewat key `__proto__`/`constructor`. | `safeMerge` menolak key tersebut |
+| **Pure function** | Output hanya bergantung input, tanpa efek samping. | `hitungPajak(subtotal)` |
+| **Rate limiting** | Membatasi jumlah request per key/waktu. | 5 login per menit |
+| **RBAC** | Otorisasi berdasarkan role. | `kasir`, `admin` |
+| **Repository** | Abstraksi akses data. | `orderRepo.save(order)` |
+| **Retry** | Mengulang operasi yang gagal sementara. | `withRetry(fn, { maxAttempts: 3 })` |
+| **scrypt** | Fungsi hash password yang lambat dan berbasis memori. | `scrypt$16384$...` |
+| **SQL injection** | Injeksi SQL lewat input yang tidak divalidasi. | `' OR 1=1 --` |
+| **SSE** | Server-Sent Events; push satu arah via HTTP. | `text/event-stream` |
+| **Structured logging** | Log JSON dengan field konsisten. | `{"level":"info","requestId":"..."}` |
+| **Test isolation** | Test tidak saling bergantung state. | Port `0`, fixture baru |
+| **Transaction** | Sekumpulan operasi database atomik. | `BEGIN` / `COMMIT` / `ROLLBACK` |
+| **Tree shaking** | Membuang kode yang tidak dipakai saat build. | Import hanya fungsi yang perlu |
+| **TTL** | Time To Live; masa berlaku cache. | Cache menu 30 detik |
+| **Worker thread** | Thread terpisah untuk pekerjaan CPU-bound. | `new Worker("./worker.js")` |
+| **XSS** | Injeksi script lewat input pengguna. | Escape `<script>` |

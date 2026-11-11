@@ -1,36 +1,43 @@
-# Panduan Pengajar — Kelas JavaScript Beginner "Kopi Senja"
+# Panduan Pengajar — Kelas JavaScript Beginner sampai Expert "Kopi Senja"
 
-Dokumen ini membantu pengajar menyampaikan 30 task secara terstruktur, menilai dengan konsisten, dan menangani kesalahan umum siswa.
+Dokumen ini membantu pengajar menyampaikan 60 task bertingkat, menilai dengan konsisten, dan menangani kesalahan umum siswa.
 
 ---
 
 ## 1. Ringkasan Kelas
 
+| Level | Folder | Jumlah | Estimasi | Fokus |
+| --- | --- | --- | --- | --- |
+| 01 · Beginner | `01-beginner/` | 30 | ±32 jam | Fondasi, DOM, async dasar |
+| 02 · Intermediate | `02-intermediate/` | 15 | ±23 jam | Modul, class, testing, CLI, state |
+| 03 · Expert | `03-expert/` | 15 | ±70 jam | Arsitektur, keamanan, API, database, operasional |
+
 | Item | Keterangan |
 | --- | --- |
-| Nama kelas | JavaScript Beginner — Studi Kasus Kopi Senja |
-| Jumlah task | 30 task bertingkat |
-| Estimasi total | ±32 jam belajar |
-| Format | 16 sesi × 120 menit, atau 8 sesi × 150 menit |
-| Prasyarat siswa | Bisa mengoperasikan komputer dan terminal dasar |
-| Tools | Node.js 18+, browser modern, VS Code |
+| Nama program | JavaScript Task Library — Studi Kasus Kopi Senja |
+| Format | Sesi 120 menit; jumlah sesi menyesuaikan level |
+| Prasyarat | Level Beginner: terminal dasar; Intermediate: fondasi JS; Expert: ES Modules + testing |
+| Tools | Node.js 18+ (Expert: Node 22+), browser, VS Code, Git |
 | Model | 20% teori, 40% demonstrasi, 40% praktik |
 
-Materi bersifat **project-based**: satu cerita (Kopi Senja) berkembang dari variabel sampai aplikasi kasir. Ini membantu siswa melihat hubungan antar konsep, bukan menghafal sintaks terpisah.
+Materi bersifat **project-based**: satu cerita (Kopi Senja) berkembang dari variabel sampai layanan pesanan produksi. Ini membantu siswa melihat hubungan antar konsep, bukan menghafal sintaks terpisah.
 
 ---
 
 ## 2. Hasil Belajar Akhir
 
-Setelah menyelesaikan seluruh task, siswa mampu:
+Setelah menyelesaikan seluruh level, siswa mampu:
 
 1. Menulis program JavaScript dengan variabel, kondisi, perulangan, dan fungsi.
 2. Mengolah array dan objek, termasuk `map`, `filter`, `reduce`, dan `sort`.
-3. Memvalidasi input serta menangani error sederhana.
-4. Membuat halaman web interaktif dengan DOM.
-5. Menyimpan data di browser dengan `localStorage`.
-6. Menggunakan `fetch`, Promise, dan `async/await` untuk mengambil data.
-7. Membangun aplikasi kasir sederhana dari nol.
+3. Memvalidasi input serta menangani error di beberapa lapisan.
+4. Membuat halaman web interaktif dengan DOM dan `localStorage`.
+5. Menggunakan `fetch`, Promise, dan `async/await` untuk mengambil data.
+6. Memecah aplikasi menjadi modul, layer, dan komponen yang bisa diuji.
+7. Menulis unit/integration test dan pipeline CI.
+8. Membangun API, database transaksional, autentikasi, cache, dan SSE.
+9. Menerapkan pertahanan keamanan dasar dan observability.
+10. Mengoperasikan aplikasi lewat Docker dengan dokumentasi yang jelas.
 
 ---
 
@@ -39,10 +46,13 @@ Setelah menyelesaikan seluruh task, siswa mampu:
 ### Teknis
 
 - [ ] Node.js terpasang di komputer pengajar dan siswa (`node --version`).
+- [ ] Untuk Intermediate/Expert: Node.js **22+** dan npm tersedia.
 - [ ] Browser modern tersedia (Chrome/Edge/Firefox).
-- [ ] Folder materi sudah dibagikan; siswa bisa membuka `tasks/`.
+- [ ] Folder materi sudah dibagikan; siswa membuka `01-beginner/`, `02-intermediate/`, atau `03-expert/`.
 - [ ] Proyektor/layar untuk live coding sudah diuji.
 - [ ] Server lokal untuk Task 29 sudah dicoba (`npx serve .`).
+- [ ] Docker tersedia untuk capstone expert (E15).
+- [ ] Repository latihan dan akses GitHub Actions sudah diuji (E12).
 - [ ] Contoh solusi pribadi sudah disiapkan, tetapi **tidak dibagikan**.
 - [ ] Koneksi internet cadangan untuk dokumentasi MDN.
 
@@ -134,6 +144,60 @@ Tujuan: memahami proses yang tidak selesai seketika.
 - Untuk `fetch`, jelaskan status HTTP dan `response.ok`.
 - Saat capstone, jangan memberi solusi utuh; gunakan sesi konsultasi per fitur.
 - Minta siswa mendemokan aplikasinya, bukan hanya mengumpulkan file.
+
+### Level Intermediate (I01–I15)
+
+Tujuan: berpindah dari “kode yang berjalan” ke “kode yang bisa dirawat”.
+
+- Mulai dari satu file, lalu refaktor ke modul; tunjukkan rasa sakit sebelum solusi.
+- Untuk closure, gunakan analogi “kotak privat” yang menyimpan state.
+- Untuk class, bandingkan dengan object + function sebelum `extends`.
+- Untuk error, ajarkan perbedaan error yang bisa di-retry dan yang tidak.
+- Untuk testing, tulis satu test yang gagal terlebih dahulu, lalu perbaiki kode.
+- Untuk CLI, selalu uji jalur sukses dan jalur error (file hilang, argumen salah).
+- Untuk state DOM, gambar alur `state → render → event → state`.
+
+**Kesalahan umum Intermediate:**
+
+| Kesalahan | Cara menjelaskan |
+| --- | --- |
+| `import` tanpa ekstensi `.js` | Tunjukkan error resolusi modul |
+| Closure dipakai untuk global state | Tunjukkan dua instance yang saling bocor |
+| `this` hilang saat method dipisah | Bandingkan `obj.method` vs `const f = obj.method` |
+| Retry mengulang error validasi | Minta siswa mengklasifikasikan error |
+| `Promise.all` menggagalkan semua | Ganti ke `allSettled` dan bandingkan |
+| Test bergantung waktu nyata | Injeksi clock atau mock timer |
+| CLI menulis file langsung | Tunjukkan risiko file setengah jadi |
+| State DOM diubah di banyak tempat | Hitung sumber kebenaran |
+
+### Level Expert (E01–E15)
+
+Tujuan: membangun sistem yang aman, terukur, dan bisa dioperasikan.
+
+- Ajarkan **membaca requirement non-fungsional**, bukan hanya fitur.
+- Untuk arsitektur, mulai dari satu service yang sulit diuji, lalu pecah layer.
+- Untuk performa, larang optimasi tanpa baseline; minta grafik sebelum/sesudah.
+- Untuk keamanan, demonya harus di lingkungan lokal dan data palsu.
+- Untuk database, tekankan transaksi dan rollback, bukan hanya query berhasil.
+- Untuk API, review status code dan error envelope seperti kontrak.
+- Untuk observability, tunjukkan satu request yang bisa dilacak dari log ke metrics.
+- Untuk CI, sengaja buat pipeline merah, lalu perbaiki.
+- Untuk capstone, nilai bukti (test, load test, log, Docker), bukan klaim.
+
+**Kesalahan umum Expert:**
+
+| Kesalahan | Cara menjelaskan |
+| --- | --- |
+| Layer domain mengimpor `fs`/`http` | Tunjukkan dependency graph dan aturan layer |
+| Worker mengirim seluruh data | Hitung memori dan gunakan chunk |
+| Benchmark tanpa warm-up | Tunjukkan variasi hasil |
+| Test integration memakai port tetap | Gunakan port `0` dan cleanup |
+| SQL string concatenation | Tunjukkan payload dan prepared statement |
+| Token disimpan/ dicetak | Audit log dan response |
+| Cache/rate limit tanpa batas | Tunjukkan pertumbuhan memori |
+| Metrics memakai ID sebagai label | Jelaskan cardinality |
+| CI memakai `npm install` | Bandingkan reproducibility `npm ci` |
+| Docker berjalan sebagai root | Tunjukkan `USER` dan least privilege |
 
 ---
 
@@ -227,6 +291,14 @@ Jika siswa tidak bisa menjelaskan, minta mengerjakan ulang bagian tersebut secar
 | `fetch` gagal di `file://` | Browser memblokir request lokal | Jalankan `npx serve .` |
 | `localStorage` tidak menyimpan | Menyimpan objek tanpa `JSON.stringify` | Simpan string, parse saat membaca |
 | Output `NaN` | Operasi pada `undefined`/string non-angka | Cek `typeof` dan konversi dengan `Number()` |
+| `Cannot use import statement outside a module` | `package.json` belum `"type": "module"` | Tambahkan `type`, atau pakai ekstensi `.mjs` |
+| `ERR_MODULE_NOT_FOUND` | Import tanpa `.js` atau path salah | Sertakan ekstensi dan cek path relatif |
+| `node:sqlite` tidak ditemukan | Node < 22 | Upgrade Node ke 22+ |
+| Worker tidak pernah selesai | `terminate`/pesan error tidak ditangani | Pasang handler `error` dan `exit` |
+| Port `EADDRINUSE` | Server lama masih berjalan | Hentikan proses atau pakai port `0` di test |
+| `fetch` gagal ke localhost | Server belum jalan / URL salah | Jalankan server, cek base URL |
+| Docker build lambat | Cache layer tidak optimal | Copy `package*.json` sebelum source |
+| Pipeline CI hijau padahal test gagal | `continue-on-error` atau script salah | Hapus pengecualian, cek exit code |
 
 ---
 

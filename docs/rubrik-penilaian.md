@@ -1,10 +1,10 @@
-# Rubrik Penilaian — 30 Task JavaScript Beginner
+# Rubrik Penilaian — 60 Task JavaScript (Beginner, Intermediate, Expert)
 
-Rubrik ini dipakai untuk menilai seluruh task secara konsisten. Setiap task bernilai maksimal **100 poin**, dan **Task 30 (capstone) dihitung 2×** dalam nilai akhir.
+Rubrik ini dipakai untuk menilai seluruh task secara konsisten. Setiap task bernilai maksimal **100 poin**. Capstone di setiap level dihitung **2×** dalam nilai akhir level.
 
 ---
 
-## 1. Komponen Umum (Task 01–29)
+## 1. Komponen Umum Level Beginner (Task 01–29)
 
 | Komponen | Bobot | Yang Dinilai |
 | --- | --- | --- |
@@ -123,7 +123,7 @@ Maksimal **+10**, tidak boleh menutupi komponen wajib yang gagal.
 
 ---
 
-## 5. Nilai Akhir
+## 5. Nilai Akhir Level Beginner
 
 Rumus:
 
@@ -151,7 +151,7 @@ Sekolah atau lembaga dapat menyesuaikan rentang selama dikomunikasikan di awal k
 
 ---
 
-## 6. Form Penilaian
+## 6. Form Penilaian Level Beginner
 
 | No | Task | Output (50) | Konsep (20) | Batas (15) | Rapi (10) | Dok (5) | Total |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -211,3 +211,97 @@ Contoh:
 - Bonus tidak boleh menutupi fitur wajib yang belum berfungsi.
 - Simpan bukti pekerjaan (file atau commit) untuk audit.
 - Gunakan rubrik yang sama untuk semua siswa pada kelas yang sama.
+
+---
+
+## 9. Rubrik Level Intermediate (I01–I15)
+
+| Komponen | Bobot | Indikator |
+| --- | --- | --- |
+| Perilaku dan output | 45 | Fungsi/CLI/UI berjalan sesuai ekspektasi |
+| Pemisahan tanggung jawab | 20 | Modul, layer, dan dependency tidak tercampur |
+| Error & kasus batas | 15 | Input salah, file hilang, timeout, retry, empty state |
+| Keterbacaan & konsistensi | 10 | Nama jelas, pola konsisten, tidak ada duplikasi besar |
+| Testing/dokumentasi | 10 | Unit test, README proyek, contoh menjalankan |
+
+### Pengurangan khusus Intermediate
+
+- Semua logika ditumpuk di satu file pada task yang meminta modul: **−15**.
+- `readFileSync`/`writeFileSync` pada task file I/O async: **−10**.
+- Retry mengulang error non-retryable: **−10**.
+- Test bergantung pada waktu nyata atau port tetap: **−10**.
+- State DOM diubah di luar `render`: **−10**.
+- CLI mengubah data meski validasi gagal: **−15**.
+
+---
+
+## 10. Rubrik Level Expert (E01–E14)
+
+| Komponen | Bobot | Indikator |
+| --- | --- | --- |
+| Perilaku dan output | 35 | Sistem berjalan sesuai kontrak dan skenario |
+| Arsitektur & separation of concerns | 20 | Layer, port/adapter, DI, tidak ada kebocoran dependency |
+| Keamanan & error handling | 15 | Validasi, secret, auth, rollback, pesan aman |
+| Testing & bukti kualitas | 15 | Unit/integration, coverage, benchmark, reproducibility |
+| Operasional & dokumentasi | 15 | Log, metrics, health, Docker, README, OpenAPI |
+
+### Pengurangan khusus Expert
+
+- Domain/service mengimpor `fs`, `http`, atau DOM: **−15**.
+- Query SQL memakai string concatenation: **−20**.
+- Secret/token/password muncul di log atau response: **−20**.
+- Transaksi tidak rollback saat gagal: **−20**.
+- Benchmark tanpa baseline/pengukuran berulang: **−10**.
+- Cache/rate limit memakai `Map` tanpa batas: **−10**.
+- Metrics memakai ID mentah sebagai label: **−10**.
+- CI memakai `npm install` atau `continue-on-error`: **−10**.
+- Docker berjalan sebagai root: **−5**.
+- Klaim performa/keamanan tanpa bukti: **−10**.
+
+---
+
+## 11. Rubrik Capstone Expert (E15)
+
+| Komponen | Bobot | Indikator |
+| --- | --- | --- |
+| Arsitektur & layer | 15 | Domain bersih, port/adapter, service bisa diuji |
+| Fungsionalitas pesanan | 25 | Perhitungan, stok, transaksi, voucher benar |
+| Database & konsistensi | 15 | Skema, constraint, migration, rollback |
+| Keamanan & auth | 15 | Hash, token, RBAC, secret, rate limit |
+| Operasional | 10 | Log, metrics, health, shutdown, Docker |
+| Testing | 10 | Unit + integration, coverage ≥ 85% |
+| Dokumentasi | 10 | README + OpenAPI akurat |
+
+Bonus maksimal **+10** (load test, tracing, backup, blue-green, audit log).
+
+---
+
+## 12. Nilai Akhir per Level
+
+| Level | Rumus |
+| --- | --- |
+| Beginner | `(jumlah Task 01–29 + 2 × Task 30) / 31` |
+| Intermediate | `(jumlah I01–I14 + 2 × I15) / 16` |
+| Expert | `(jumlah E01–E14 + 2 × E15) / 16` |
+
+Jika siswa hanya mengambil sebagian task, gunakan rata-rata task yang dikerjakan dan cantumkan cakupannya di rapor.
+
+### Form Penilaian Level Intermediate/Expert
+
+| No | Task | Output | Arsitektur | Error/Keamanan | Testing | Operasional/Dok | Total |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 01 | | | | | | | |
+| 02 | | | | | | | |
+| 03 | | | | | | | |
+| 04 | | | | | | | |
+| 05 | | | | | | | |
+| 06 | | | | | | | |
+| 07 | | | | | | | |
+| 08 | | | | | | | |
+| 09 | | | | | | | |
+| 10 | | | | | | | |
+| 11 | | | | | | | |
+| 12 | | | | | | | |
+| 13 | | | | | | | |
+| 14 | | | | | | | |
+| 15 | | | | | | | |
